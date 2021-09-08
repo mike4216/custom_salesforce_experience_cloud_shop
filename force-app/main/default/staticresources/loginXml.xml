@@ -1,0 +1,12 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:enterprise.soap.sforce.com">
+   <soapenv:Header>
+      
+    
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn:login>
+         <urn:username>shop.michael.leshchenko@vrpconsulting.com</urn:username>
+         <urn:password>mike4216slU7r85ECjsVwDQarw84opIH</urn:password>
+      </urn:login>
+   </soapenv:Body>
+</soapenv:Envelope>

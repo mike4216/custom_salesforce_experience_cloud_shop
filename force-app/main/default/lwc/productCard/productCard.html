@@ -1,0 +1,31 @@
+
+<template>
+    <template for:each={productData.data} for:item="product">
+        <lightning-layout-item 
+            key={product.Id} size="12"
+            small-device-size="6" 
+            medium-device-size="4"
+            large-device-size="3">
+            <div class="custom-box slds-box slds-p-around_medium slds-text-align_center">
+                    <img src={product.image__c}>
+            </div>
+            <h1 class="slds-var-p-around_xx-small slds-var-m-top_x-small slds-truncate slds-text-title_caps bold-text  slds-text-align_center">
+                {product.Name}
+             </h1>
+             <h2 class="slds-var-p-around_xx-small slds-text-body_regular">
+                Price:&nbsp;
+                <lightning-formatted-number value={product.Price__c} 
+                    format-style="currency"
+                    currency-code="EUR">
+                </lightning-formatted-number>
+                <button class="slds-button slds-button_outline-brand" onclick={showPopUpForm} >Buy Now</button>
+            </h2>
+             <p class="slds-align_absolute-center">{product.Description}</p>
+        </lightning-layout-item>
+     </template> 
+     <div class="modal_window">
+        <c-modal-window-form if:true={showModalWindowForm} productid = {product.Id}></c-modal-window-form>
+    </div>
+     
+
+</template>
