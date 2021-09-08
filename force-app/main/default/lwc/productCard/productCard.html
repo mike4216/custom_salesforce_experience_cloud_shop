@@ -21,11 +21,16 @@
                 <button class="slds-button slds-button_outline-brand" onclick={showPopUpForm} >Buy Now</button>
             </h2>
              <p class="slds-align_absolute-center">{product.Description}</p>
+             
+             
+             <div class="modal_window">
+                <c-modal-window-form if:true={showModalWindowForm} productid = {product.Id}></c-modal-window-form>
+            </div>
+            
         </lightning-layout-item>
+        
      </template> 
-     <div class="modal_window">
-        <c-modal-window-form if:true={showModalWindowForm} productid = {product.Id}></c-modal-window-form>
-    </div>
+    
      
 
 </template>
