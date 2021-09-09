@@ -20,7 +20,8 @@ export default class ModalWindowForm extends LightningElement {
     }
 
     handleSuccess(event){
-        this.template.querySelector(".message").innerText = 'Your order submitted';
+        this.template.querySelector(".slds-modal__container").innerText = 'Your order submitted';
+        this.dispatchEvent(new CustomEvent('closewindow'));
     }
 }
 

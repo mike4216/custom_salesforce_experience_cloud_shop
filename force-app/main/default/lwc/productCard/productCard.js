@@ -23,5 +23,9 @@ export default class productCard extends LightningElement {
         console.log('popup show ' + this.showModalWindowForm );
     }
 
+    closePopUpForm(event){
+        this.showModalWindowForm = false;
+    }
+    
 }
 
