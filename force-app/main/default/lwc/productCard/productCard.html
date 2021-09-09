@@ -12,15 +12,16 @@
             <h1 class="slds-var-p-around_xx-small slds-var-m-top_x-small slds-truncate slds-text-title_caps bold-text  slds-text-align_center">
                 {product.Name}
              </h1>
-             <h2 class="slds-var-p-around_xx-small slds-text-body_regular">
+             <p class="slds-align_absolute-center">{product.Description}</p>
+             <h2 class="slds-var-p-around_xx-small slds-text-body_regular slds-align_absolute-center">
                 Price:&nbsp;
                 <lightning-formatted-number value={product.Price__c} 
                     format-style="currency"
                     currency-code="EUR">
                 </lightning-formatted-number>
-                <button class="slds-button slds-button_outline-brand" onclick={showPopUpForm} >Buy Now</button>
+                <button class="slds-button slds-button_outline-brand slds-m-left_medium" onclick={showPopUpForm} >Buy Now</button>
             </h2>
-             <p class="slds-align_absolute-center">{product.Description}</p>
+             
              
              
              <div class="modal_window">
