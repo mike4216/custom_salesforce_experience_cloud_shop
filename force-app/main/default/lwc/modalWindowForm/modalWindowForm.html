@@ -1,17 +1,20 @@
 <template>
-    <div>
-      <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+    
+      <section role="dialog" tabindex="-1" class="slds-box slds-modal slds-fade-in-open slds-modal_small custom" 
+          aria-labelledby="modal-heading-01"
+          aria-modal="true" 
+          aria-describedby="modal-content-id-1">
         <div class="slds-modal__container">
-          <header class="slds-modal__header">
-            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+          <header class="slds-modal__header slds-theme_shade">
+            <!-- <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
               <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
                 <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
               </svg>
               <span class="slds-ass\istive-text">Close</span>
-            </button>
-            <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Modal header</h2>
+            </button> -->
+            <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">product order window</h2>
           </header>
-          <div class="custom">
+          <div class="slds-theme_shade ">
             <div class="message"></div>
             <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
               <lightning-record-form
@@ -24,5 +27,5 @@
           </div>
         </div>
       </section>|
-    </div>
+   
 </template>
