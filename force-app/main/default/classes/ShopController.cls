@@ -3,7 +3,7 @@ public with sharing class ShopController {
 	public static List<Product2> getDataForGallery(){
 		return [
 			SELECT Id, Name, Price__c, thumb__c 
-			FROM Product2 LIMIT 50];
+			FROM Product2];
 	}
 
 	@AuraEnabled(cacheable=true)
