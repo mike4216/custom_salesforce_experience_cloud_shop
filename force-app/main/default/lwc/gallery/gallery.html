@@ -1,5 +1,12 @@
 <template>
     <lightning-card title="Catalog" icon-name="standard:catalog">
+        
+        <div class="slds-clearfix">
+            <div class="slds-float_right slds-m-right_x-large">
+                <c-cart></c-cart>
+            </div>
+        </div>
+        
         <div class="slds-align_absolute-center">
             <lightning-button label="Prev" icon-name="utility:chevronleft" 
                 icon-position="left" onclick={paginatePrev}></lightning-button>
@@ -7,6 +14,8 @@
                 icon-position="right" onclick={paginateNext}></lightning-button>
                 <p class="slds-m-left_medium">{showFromTotal}/{totalProducts}</p>
         </div>
+
+
         <lightning-layout multiple-rows horizontal-align="center">
             
 
