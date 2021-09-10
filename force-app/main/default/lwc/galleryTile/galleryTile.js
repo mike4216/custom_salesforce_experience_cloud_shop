@@ -15,4 +15,11 @@ export default class GalleryTile extends  NavigationMixin(LightningElement) {
             }
         })
     }
+
+    updateCounter(event){
+        console.log('galleryTile ' + event.detail);
+        this.dispatchEvent(new CustomEvent("counterchange", {
+            detail: event.detail
+        }));
+    }
 }

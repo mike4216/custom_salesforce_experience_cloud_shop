@@ -21,7 +21,9 @@
                     &nbsp;
                 </lightning-layout-item>
                 <lightning-layout-item>
-                    <c-add-to-cart-button productid = {product.Id}></c-add-to-cart-button>
+                    <c-add-to-cart-button 
+                    productid = {product.Id}
+                    oncounterchange={updateCounter}></c-add-to-cart-button>
                 </lightning-layout-item>
             </lightning-layout>
         </div>

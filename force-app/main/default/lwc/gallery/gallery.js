@@ -8,6 +8,7 @@ export default class gallery extends LightningElement {
     @track  totalProducts;
     @track showFromTotal = this.numberProductsPerPage;
     @track products;
+    @track counter;
 
 
     @wire(getDataForGallery)
@@ -41,5 +42,11 @@ export default class gallery extends LightningElement {
         );
         this.showFromTotal = prevProducts - this.numberProductsPerPage;
         this.currentPageNumber -= 1;
-    }   
+    }
+    
+    updateCounter(event){
+        console.log('gallery' + event.detail);
+        this.counter = event.detail;
+        console.log('counter ' + this.counter);
+    } 
 }

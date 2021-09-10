@@ -1,9 +1,9 @@
 <template>
     <lightning-card title="Catalog" icon-name="standard:catalog">
-        
+
         <div class="slds-clearfix">
             <div class="slds-float_right slds-m-right_x-large">
-                <c-cart></c-cart>
+                <c-cart productcounter={counter}></c-cart>
             </div>
         </div>
         
@@ -25,7 +25,7 @@
                     small-device-size="6" 
                     medium-device-size="4"
                     large-device-size="3">
-                    <c-gallery-tile product={product}></c-gallery-tile>
+                    <c-gallery-tile oncounterchange={updateCounter} product={product}></c-gallery-tile>
                 </lightning-layout-item>
              </template> 
             

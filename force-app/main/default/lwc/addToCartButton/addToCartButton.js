@@ -1,13 +1,16 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 
 export default class AddToCartButton extends LightningElement {
     @api productid;
-    
+
     handleAddToCart(){
         var cookiesArr = this.readCookie();
         cookiesArr.push(this.productid);
         document.cookie="ids=" + this.arrToJson(cookiesArr);
-        console.log(document.cookie);
+        this.dispatchEvent(new CustomEvent("counterchange", {
+            detail: cookiesArr.length
+        }));
+        console.log('handleAddToCart');
     }
 
     arrToJson(arr){
