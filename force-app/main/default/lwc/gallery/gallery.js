@@ -41,9 +41,5 @@ export default class gallery extends LightningElement {
         );
         this.showFromTotal = prevProducts - this.numberProductsPerPage;
         this.currentPageNumber -= 1;
-
-    }
-
-
-    
+    }   
 }

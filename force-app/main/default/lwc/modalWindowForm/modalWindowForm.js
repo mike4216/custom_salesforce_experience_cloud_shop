@@ -19,8 +19,13 @@ export default class ModalWindowForm extends LightningElement {
         this.template.querySelector('lightning-record-form').submit(fields);
     }
 
-    handleSuccess(event){
+    handleSuccess(){
         this.template.querySelector(".slds-modal__container").innerText = 'Your order submitted';
+        setTimeout(2000);
+        this.dispatchEvent(new CustomEvent('closewindow'));
+    }
+
+    cancel(){
         this.dispatchEvent(new CustomEvent('closewindow'));
     }
 }
