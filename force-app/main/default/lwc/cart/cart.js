@@ -1,7 +1,19 @@
-import { LightningElement, track, api } from 'lwc';
+import { LightningElement, track, api, wire } from 'lwc';
+import getDataForProductCard from '@salesforce/apex/ShopController.getDataForProductCard';
+
 
 export default class Cart extends LightningElement {
-    @api productcounter = 0;
+    cookiesArr;
+
+    constructor(){
+        super();
+        this.cookiesArr = this.readCookie();
+    }
+    
+
+    //получить из куки массив id
+    //рассчиатвть counter при загрузке страницы
+    // 
 
     showCartWindow(){
         var data = this.template.querySelector(".slds-is-open");
@@ -12,11 +24,16 @@ export default class Cart extends LightningElement {
         }
     }
 
+
+    @wire(getDataForProductCard, {ids: ''})
+    getProductData(){
+    }
+
     readCookie(){
         var arr =  document.cookie.split(';');
-        var returnArr;
+        var returnArr = [];
         arr.forEach(element => {
-            var value = element.split('=')
+            var value = element.split('=');
             if (value.shift().trim() == 'ids'){
                 returnArr = JSON.parse(value);
                 return;
@@ -24,6 +41,11 @@ export default class Cart extends LightningElement {
         });
         return returnArr;
     }
+
+
+
+
+
 
     // updateCounter(event){
     //     console.log(event.detail);
