@@ -5,12 +5,15 @@ export default class AddToCartButton extends LightningElement {
 
     handleAddToCart(){
         var cookiesArr = this.readCookie();
-        cookiesArr.push(this.productid);
+        console.log(cookiesArr);
+        if(cookiesArr){
+            cookiesArr.push(this.productid);
+            
+        }
         document.cookie="ids=" + this.arrToJson(cookiesArr);
-        this.dispatchEvent(new CustomEvent("counterchange", {
-            detail: cookiesArr.length
-        }));
-        console.log('handleAddToCart');
+        // // this.dispatchEvent(new CustomEvent("counterchange", {
+        // //     detail: cookiesArr.length
+        // // }));
     }
 
     arrToJson(arr){
@@ -19,9 +22,9 @@ export default class AddToCartButton extends LightningElement {
 
     readCookie(){
         var arr =  document.cookie.split(';');
-        var returnArr;
+        var returnArr = [];
         arr.forEach(element => {
-            var value = element.split('=')
+            var value = element.split('=');
             if (value.shift().trim() == 'ids'){
                 returnArr = JSON.parse(value);
                 return;
