@@ -8,6 +8,7 @@ export default class AddToCartButton extends LightningElement {
     @api image;
 
     handleAddToCart(){
+        var cookiesMap = new Map();
         var productMap = new Map();
 
         productMap['id'] =  this.productid;
@@ -16,8 +17,8 @@ export default class AddToCartButton extends LightningElement {
         productMap['image'] = this.image;
         productMap['count'] = 1;
       
-        var cookiesMap = this.readCookie();
-       
+        cookiesMap = this.readCookie();
+
         if(cookiesMap[this.productid]){
             cookiesMap[this.productid]['count'] += 1
         }else{
@@ -33,12 +34,14 @@ export default class AddToCartButton extends LightningElement {
 
     readCookie(){
         var arr =  document.cookie.split(';');
-        var returnArr = [];
+        var returnArr = new Map();
         arr.forEach(element => {
             var value = element.split('=');
             if (value.shift().trim() == 'cart'){
-                returnArr = JSON.parse(value);
-                return;
+                if (!value == ''){
+                    returnArr = JSON.parse(value);    
+                    return;
+                }
             }
         });
         return returnArr;
