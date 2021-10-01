@@ -1,23 +1,34 @@
+import MailingPostalCode from '@salesforce/schema/Contact.MailingPostalCode';
 import { LightningElement, api, track } from 'lwc';
 
 export default class AddToCartButton extends LightningElement {
     @api productid;
+    @api name;
+    @api price;
 
     handleAddToCart(){
-        var cookiesArr = this.readCookie();
-        console.log(cookiesArr);
-        if(cookiesArr){
-            cookiesArr.push(this.productid);
-            
+        var cookiesMap = new Map();
+
+        var productMap = new Map();
+        productMap['id'] =  this.productid;
+        productMap['name'] = this.name;
+        productMap['price'] = this.price;
+        productMap['count'] = 1;
+
+        cookiesMap[this.productid] = productMap;
+      
+        cookiesMap = this.readCookie();
+      
+        if(cookiesMap[this.productid]){
+            cookiesMap[this.productid]['count'] += 1
+        }else{
+            cookiesMap[this.productid] = productMap;
         }
-        document.cookie="ids=" + this.arrToJson(cookiesArr);
-        // // this.dispatchEvent(new CustomEvent("counterchange", {
-        // //     detail: cookiesArr.length
-        // // }));
+        document.cookie="cart=" + this.arrToJson(cookiesMap);
     }
 
-    arrToJson(arr){
-        return JSON.stringify(arr)
+    arrToJson(map){
+        return JSON.stringify(map)
     }
 
     readCookie(){
@@ -25,7 +36,7 @@ export default class AddToCartButton extends LightningElement {
         var returnArr = [];
         arr.forEach(element => {
             var value = element.split('=');
-            if (value.shift().trim() == 'ids'){
+            if (value.shift().trim() == 'cart'){
                 returnArr = JSON.parse(value);
                 return;
             }
