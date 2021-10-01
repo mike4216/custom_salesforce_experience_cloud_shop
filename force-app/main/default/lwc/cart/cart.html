@@ -1,19 +1,41 @@
 <template>
-    <div class="slds-dropdown-trigger slds-dropdown-trigger_click " onclick={showCartWindow}>
-        <button class="slds-button slds-button_outline-brand" aria-haspopup="true">Shopping cart ()</button>
+    <div class="slds-dropdown-trigger slds-dropdown-trigger_click ">
+        <button class="slds-button slds-button_outline-brand" onclick={showCartWindow} aria-haspopup="true">Shopping cart ()</button>
         <div class="slds-dropdown slds-dropdown_right slds-dropdown_large">
-           <ul>
-               <li>ldfkelfkle</li>
-               <li>ldfkelfkle</li>
-               <li>ldfkelfkle</li>
-               <li>ldfkelfkle</li>
-               <li>ldfkelfkle</li>
-               <li>ldfkelfkle</li>
-               <li>ldfkelfkle</li>
-               <li>ldfkelfkle</li>
-               <li>ldfkelfkle</li>
+            <!-- <lightning-layout multiple-rows horizontal-align="center"> -->
+            
 
-            </ul>
+               <template if:true={products}>
+                <template for:each={products} for:item="product">
+                   
+                    <!-- <lightning-layout-item key={product.Id}> -->
+    
+                        <table key={product.Id} class="slds-table slds-table_cell-buffer slds-table_bordered" >
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src={product.image__c} width="70" height="70">
+                                    </td>
+                                    <td>
+                                        {product.Name}
+                                    </td>
+                                    <td >
+                                        {product.Price__c} 
+                                    </td>
+                                    <!-- <td data-label="Account Name">
+                                        {product.Description}
+                                    </td>                                       -->
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    <!-- </lightning-layout-item> -->
+                    
+                 </template> 
+               </template>
+                
+            <!-- </lightning-layout> -->
         </div>
     </div>
 
