@@ -5,6 +5,7 @@ export default class AddToCartButton extends LightningElement {
     @api productid;
     @api name;
     @api price;
+    @api image;
 
     handleAddToCart(){
         var productMap = new Map();
@@ -12,6 +13,7 @@ export default class AddToCartButton extends LightningElement {
         productMap['id'] =  this.productid;
         productMap['name'] = this.name;
         productMap['price'] = this.price;
+        productMap['image'] = this.image;
         productMap['count'] = 1;
       
         var cookiesMap = this.readCookie();
