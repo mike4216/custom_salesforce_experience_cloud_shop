@@ -22,7 +22,12 @@
                 </lightning-layout-item>
                 <lightning-layout-item>
                     <c-add-to-cart-button
-                        productid = {product.Id}></c-add-to-cart-button>
+                        name = {product.Name}
+                        productid = {product.Id}
+                        price = {product.Price__c}
+                        image = {product.thumb__c}
+                        positive = "true"
+                        label = "Add to cart"></c-add-to-cart-button>
                 </lightning-layout-item>
             </lightning-layout>
         </div>

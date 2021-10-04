@@ -1,42 +1,68 @@
 import { LightningElement, track, api, wire } from 'lwc';
 import getDataForCart from '@salesforce/apex/ShopController.getDataForCart';
+import ContactMobile from '@salesforce/schema/Case.ContactMobile';
+import { getListUi } from 'lightning/uiListApi';
 
 
 export default class Cart extends LightningElement {
-    @track products
+    @track products;
+    @track productToShow; 
+    
+    constructor(){
+        super();
+        // this.products = handleLoad();
+
+    }
 
     showCartWindow(){
-        this.handleLoad();
+        console.log('kdfjdfdf');
+        this.productToShow = this.handleLoad();
+        this.handleProxyObject();
         var data = this.template.querySelector(".slds-is-open");
         if (data){
             this.template.querySelector(".slds-dropdown-trigger").classList.remove('slds-is-open');
         }else{
             this.template.querySelector(".slds-dropdown-trigger").classList.add('slds-is-open');
         }
+        // console.log);
     }
 
     handleLoad(){
-        //get cookies and count the number of products
-        var productsCountedMap = this.dublicateCounter(this.readCookie());
-        this.getProductDetailData(productsCountedMap);
+        console.log('dlkdlfkdk');
+        // var pr  = new Map();
+        var pr = this.readCookie();
+        // console.log(pr);
+       return pr;
+    }
+
+    handleProxyObject(){
+        console.log(this.productToShow);
+        this.products = [];
+        Object.keys(this.productToShow).forEach(el=>{
+            this.products.push(this.productToShow[el]);
+        })
+        console.log(this.products);
+        // console.log(this.productToShow.keys());
     }
 
     readCookie(){
         var arr =  document.cookie.split(';');
-        var returnArr = [];
+        var returnArr = new Map();
         arr.forEach(element => {
             var value = element.split('=');
-            if (value.shift().trim() == 'ids'){
-                returnArr = JSON.parse(value);
-                return;
+            if (value.shift().trim() == 'cart'){
+                if (value != ''){
+                    returnArr = JSON.parse(value);    
+                    return;
+                }
             }
         });
         return returnArr;
     }
 
-    getProductDetailData(productsCountedMap){
+    getProductDetailData(){
         var ids = [];
-        for(let key of productsCountedMap.keys()){
+        for(let key of this.productsCountedMap.keys()){
             ids.push(key);
         }
         getDataForCart({ids: ids})
@@ -47,7 +73,20 @@ export default class Cart extends LightningElement {
                 this.error = error;
             });
         console.log(this.products.length);
-        
+    }
+
+    add(){
+        this.productToShow = this.handleLoad();
+        this.handleProxyObject(); 
+    }
+
+    remove(){
+        this.number--;
+        this.calculatePrice()
+    }
+
+    calculatePrice(){
+        return this.price * this.numer;
     }
 
     // @track cookiesArr;

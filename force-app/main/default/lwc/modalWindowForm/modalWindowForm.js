@@ -8,10 +8,9 @@ import QUANTITY_FIELD from '@salesforce/schema/Customer_history__c.Quantity__c';
 
 export default class ModalWindowForm extends LightningElement {
     @api productid;
-    @api  objectApiName = CUSTOMER_HISTORY_OBJ
+    @api objectApiName = CUSTOMER_HISTORY_OBJ
 
     fields = [NAME_FIELD, MOBILE_PHONE_FIELD, QUANTITY_FIELD];
-
 
     handleSubmit(event){
         event.preventDefault();
