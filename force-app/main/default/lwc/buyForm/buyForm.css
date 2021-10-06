@@ -2,9 +2,20 @@
     z-index: 99999;
     background-color: brown;
 } */
+.slds-modal__container{
+    display: block;
+}
 .custom {
     position: relative;
+    left: -300px;
 }
 .custom_container{
     position: static;
+}
+
+@media (min-width: 48em)
+{
+    .slds-modal__container {
+        width: 80%;
+    }
 }
