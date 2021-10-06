@@ -7,12 +7,6 @@ export default class Cart extends LightningElement {
     @track productToShow;
     @track cartEmpty; 
     
-    constructor(){
-        super();
-        // this.products = handleLoad();
-
-    }
-
     showCartWindow(){
         this.productToShow = this.handleLoad();
         this.handleProxyObject();
@@ -22,7 +16,6 @@ export default class Cart extends LightningElement {
         }else{
             this.template.querySelector(".slds-dropdown-trigger").classList.add('slds-is-open');
         }
-        // console.log);
     }
 
     handleLoad(){
