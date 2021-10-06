@@ -14,7 +14,6 @@ export default class Cart extends LightningElement {
     }
 
     showCartWindow(){
-        console.log('kdfjdfdf');
         this.productToShow = this.handleLoad();
         this.handleProxyObject();
         var data = this.template.querySelector(".slds-is-open");

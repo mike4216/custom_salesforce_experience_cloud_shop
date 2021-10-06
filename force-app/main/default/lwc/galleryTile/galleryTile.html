@@ -11,7 +11,11 @@
         <div class="slds-var-p-around_xx-small slds-text-body_regular slds-text-align_center">
             <lightning-layout horizontal-align='space'>
                 <lightning-layout-item>
-                    <button class="slds-button slds-button_outline-brand">Buy now</button>
+                    <!-- <button class="slds-button slds-button_outine-brand">Buy now</button> -->
+                    <c-buy-form 
+                        label='Buy now!'
+                        productid = {product.Id}
+                        price = {product.Price__c}></c-buy-form> 
                 </lightning-layout-item>
                 <lightning-layout-item >
                     &nbsp;Price:&nbsp;

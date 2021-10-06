@@ -24,4 +24,18 @@ public with sharing class ShopController {
 			WHERE Id IN :Ids
 		];
 	}
+
+	@AuraEnabled
+	public static void saveOrder(String json){
+		statistic__c customerStatictic = new statistic__c();
+		System.debug(json);
+		Map<String, Object> orderDetails = (Map<String, Object>)System.JSON.deserializeUntyped(json);
+	
+		customerStatictic.customer_first_name__c = (String)orderDetails.get('first_name');
+		customerStatictic.customer_last_name__c = (String)orderDetails.get('last_name');
+		customerStatictic.order_price__c = (Decimal)orderDetails.get('order_cost');
+		customerStatictic.product_name__c = System.JSON.serialize(orderDetails.get('ids'));
+		System.debug(customerStatictic);
+		insert customerStatictic;
+	}
 }

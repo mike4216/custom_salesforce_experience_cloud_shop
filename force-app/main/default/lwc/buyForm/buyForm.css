@@ -1,0 +1,10 @@
+/* .modal_window{
+    z-index: 99999;
+    background-color: brown;
+} */
+.custom {
+    position: relative;
+}
+.custom_container{
+    position: static;
+}

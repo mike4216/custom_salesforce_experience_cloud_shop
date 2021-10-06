@@ -18,7 +18,6 @@
 
         <lightning-layout multiple-rows horizontal-align="center">
             
-
             <template for:each={products} for:item="product">
                 <lightning-layout-item 
                     key={product.Id} size="12"
@@ -38,5 +37,6 @@
                 icon-position="right" onclick={paginateNext}></lightning-button>
                 <p class="slds-m-left_medium">{showFromTotal}/{totalProducts}</p>
         </div>
+        <!-- <c-modal-window-form if:true={showModalWindowForm}></c-modal-window-form> -->
     </lightning-card>
 </template>

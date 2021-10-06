@@ -36,7 +36,7 @@
                                         <div class="custom_input">
                                             <div class="slds-form-element">
                                                 <div class="slds-form-element__control">
-                                                  <input type="text" id ={product.id} placeholder={product.count} required="" class="slds-input" />
+                                                  <input type="text" id ={product.id} placeholder={product.count} required="" class="slds-input" disabled="disabled" />
                                                 </div>
                                               </div>
                                         </div>
@@ -56,7 +56,12 @@
                         </tr>
                     </tbody>
                 </table>
-         </template> 
+            </template>
+            <div class="custom_position">
+                <div class="slds-box slds-theme_shade"> 
+                    <c-buy-form label='confirm order'></c-buy-form>
+                </div>
+            </div> 
         </div>
     </div>
 </template>

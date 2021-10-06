@@ -9,6 +9,7 @@ export default class gallery extends LightningElement {
     @track showFromTotal = this.numberProductsPerPage;
     @track products;
     @track counter;
+    @track showModalWindowForm = false;
 
 
     @wire(getDataForGallery)
@@ -49,4 +50,8 @@ export default class gallery extends LightningElement {
         this.counter = event.detail;
         console.log('counter ' + this.counter);
     } 
+
+    // showModal(){
+    //     this.showModalWindowForm = true;
+    // }
 }
