@@ -2,12 +2,6 @@
     /* background-color: aqua; */
     min-width: 700%;
 }
-.custom{
-    height: 50px;
-}
 .custom_input{
     width: 50px;
-}
-.custom_position{
-    position: static;
 }
