@@ -1,27 +1,55 @@
 import { LightningElement, track, wire } from "lwc";
 import getDataForGallery from "@salesforce/apex/ShopController.getDataForGallery";
+import getProductCount from "@salesforce/apex/ShopController.getProductCount"
 
 export default class gallery extends LightningElement {
     allProducts;
     numberProductsPerPage = 10;
     currentPageNumber = 1;
-    @track  totalProducts;
+    start = 1;
+    dbQueryLImit = 100;
+    @track totalProducts;
     @track showFromTotal = this.numberProductsPerPage;
     @track products;
     @track counter;
     @track showModalWindowForm = false;
 
-
-    @wire(getDataForGallery)
-    getAllProducts(response){
+    @wire(getProductCount)
+    getCount(response){
         if(response.data){
-            this.allProducts = response.data;
-            this.products = this.allProducts.slice(0,this.numberProductsPerPage);
-            this.totalProducts = this.allProducts.length;
+            this.totalProducts = response.data[0].counter;
         }else if (response.error){
             //handle
         }
+        this.getProducts(this.start, 100)
+        console.log('products')
+    };
+
+
+    getProducts(start, limit){
+        var limits = [start, start * limit]
+        getDataForGallery({limits: limits})
+            .then(result => {
+                this.products = result;
+            })
+            .catch(error => {
+                this.error = error;
+                console.log(error);
+            });
+        console.log(this.products);
     }
+
+
+    // @wire(getDataForGallery)
+    // getProducts(response){
+    //     if(response.data){
+    //         this.allProducts = response.data;
+    //         this.products = this.allProducts.slice(0,this.numberProductsPerPage);
+    //         // this.totalProducts = this.allProducts.length;
+    //     }else if (response.error){
+    //         //handle
+    //     }
+    // }
    
     paginateNext(){
         var previousProducts = this.currentPageNumber * this.numberProductsPerPage

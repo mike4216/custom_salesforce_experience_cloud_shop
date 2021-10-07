@@ -1,9 +1,18 @@
 public with sharing class ShopController {
 	@AuraEnabled(cacheable=true)
-	public static List<Product2> getDataForGallery(){
+	public static List<Product2> getDataForGallery(List<Integer> limits){
+		System.debug(limits);
 		return [
 			SELECT Id, Name, Price__c, thumb__c 
 			FROM Product2
+			LIMIT :limits[1] OFFSET :limits[0]
+		];
+	}
+
+	@AuraEnabled(cacheable=true)
+	public static List<AggregateResult> getProductCount(){
+		return [
+			SELECT COUNT(Id) counter FROM Product2
 		];
 	}
 
