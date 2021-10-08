@@ -5,3 +5,10 @@
 .custom_input{
     width: 50px;
 }
+
+@media(min-width: 48em){
+    .slds-modal__container {
+        width: 100%;
+        max-width: 50rem;
+    }
+}

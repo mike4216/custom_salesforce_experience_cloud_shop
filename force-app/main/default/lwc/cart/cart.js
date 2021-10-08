@@ -6,16 +6,25 @@ export default class Cart extends LightningElement {
     @track products;
     @track productToShow;
     @track cartEmpty; 
+    @track openModal = false;
     
     showCartWindow(){
         this.productToShow = this.handleLoad();
         this.handleProxyObject();
-        var data = this.template.querySelector(".slds-is-open");
-        if (data){
-            this.template.querySelector(".slds-dropdown-trigger").classList.remove('slds-is-open');
-        }else{
-            this.template.querySelector(".slds-dropdown-trigger").classList.add('slds-is-open');
+        if (window.matchMedia("(min-width: 900px)").matches) {
+            var data = this.template.querySelector(".slds-is-open");
+            if (data){
+                this.template.querySelector(".slds-dropdown-trigger").classList.remove('slds-is-open');
+            }else{
+                this.template.querySelector(".slds-dropdown-trigger").classList.add('slds-is-open');
+            }
+        } else {
+            this.openModal = true;
         }
+    }
+
+    closeModal() {
+        this.openModal = false;
     }
 
     handleLoad(){
