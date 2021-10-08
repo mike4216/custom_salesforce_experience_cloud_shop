@@ -1,29 +1,53 @@
 import { LightningElement, track, wire } from "lwc";
 import getDataForGallery from "@salesforce/apex/ShopController.getDataForGallery";
+import getProductCount from "@salesforce/apex/ShopController.getProductCount"
 
 export default class gallery extends LightningElement {
-    allProducts;
+    allProducts = [];
     numberProductsPerPage = 10;
     currentPageNumber = 1;
-    @track  totalProducts;
+    start = 1;
+    dbQueryLImit = 0;
+    @track totalProducts;
     @track showFromTotal = this.numberProductsPerPage;
     @track products;
     @track counter;
-    @track showModalWindowForm = false;
 
+    constructor(){
+        super();
+        this.getProducts(this.dbQueryLImit);
+    }
 
-    @wire(getDataForGallery)
-    getAllProducts(response){
+    @wire(getProductCount)
+    getCount(response){
         if(response.data){
-            this.allProducts = response.data;
-            this.products = this.allProducts.slice(0,this.numberProductsPerPage);
-            this.totalProducts = this.allProducts.length;
+            this.totalProducts = response.data[0].counter;
         }else if (response.error){
             //handle
         }
+    };
+
+    getProducts(offset){
+        this.dbQueryLImit = this.numberProductsPerPage * 5;
+        var limits = [offset, this.dbQueryLImit]
+        getDataForGallery({limits: limits})
+            .then(result => {
+                var first_page = this.allProducts.length == 0;
+                this.allProducts.push.apply(this.allProducts, result);
+                if(first_page){
+                    this.products = this.allProducts.slice(0,this.numberProductsPerPage);
+                }
+            })
+            .catch(error => {
+                this.error = error;
+                console.log(error);
+            });
     }
    
     paginateNext(){
+        if(this.showFromTotal > this.totalProducts){
+            return;
+        }
         var previousProducts = this.currentPageNumber * this.numberProductsPerPage
         this.products = this.allProducts.slice(
             previousProducts,
@@ -31,6 +55,7 @@ export default class gallery extends LightningElement {
         );
         this.showFromTotal = previousProducts + this.numberProductsPerPage
         this.currentPageNumber += 1;
+        this.productObserver(previousProducts)
     }
 
     paginatePrev(){
@@ -45,13 +70,10 @@ export default class gallery extends LightningElement {
         this.currentPageNumber -= 1;
     }
     
-    updateCounter(event){
-        console.log('gallery' + event.detail);
-        this.counter = event.detail;
-        console.log('counter ' + this.counter);
-    } 
-
-    // showModal(){
-    //     this.showModalWindowForm = true;
-    // }
+    productObserver(index, safeCount = 3){
+        safeCount = this.numberProductsPerPage * safeCount;
+        if (index + safeCount >= this.allProducts.length && this.allProducts.length < this.totalProducts){
+            this.getProducts(this.allProducts.length);
+        }
+    }
 }
