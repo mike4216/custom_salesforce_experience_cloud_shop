@@ -18,10 +18,10 @@
     border: 1px solid grey;
 }
 
-.snake {
+.green {
     background: green;
 }
 
-.food {
-    background: red;
+.grey {
+    background: grey;
 }

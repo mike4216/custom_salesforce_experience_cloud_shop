@@ -5,9 +5,25 @@
    <div class="game_container">
       <template if:true={innerBox}>
          <template for:each={innerBox} for:item="box">
-            <div class="game_block" key={box.id}>
-               {box.id}
-            </div>
+            <template if:true={box.active}>
+               <div class="game_block green" key={box.id}>
+                  {box.id}
+               </div>
+            </template>
+
+            <template if:false={box.active}>
+
+               <template if:true={box.box}>
+                  <div class="game_block grey" key={box.id}>
+                     {box.id}
+                  </div>
+               </template>
+               <template if:false={box.box}>
+                  <div class="game_block" key={box.id}>
+                     {box.id}
+                  </div>
+               </template>
+            </template>
          </template>
       </template>
    </div>

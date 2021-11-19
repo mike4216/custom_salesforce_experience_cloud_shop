@@ -74,37 +74,34 @@ export default class Game extends LightningElement {
                     }else{
                         obj = {id: `${x}:${y}`, active: false, box: false};
                     }
-                   
                     tmpBlocks.push(obj);
                     this.gameBlocks.set(`${x}:${y}`, tmpBlocks.indexOf(obj, 0));
                 }
-
             }
 
             
             this.renderComplete = true;
             this.addKeyboardsControls();
             this.innerBox = tmpBlocks;
-            console.log(this.gameBlocks);
-            // this.startGame();
+            this.renderBox(4, 5)
         }
         
     }
 
     renderBox(xPoint, yPoint){
+        // console.log(xPoint, yPoint);
         // let startBoxPoint = this.gameBlocks.findIndex(x => x.id == `${xPoint}:${yPoint}`);
-
         let boxSize = 6;
-        for(let y = yPoint;  y < boxSize; y++){
-            for(let x = xPoint; x < boxSize; x++){
-                this.box.set(`${x}:${y}`, {
-                    active: false,
-                    box: true
-                });
+        for(let y = yPoint;  y < yPoint + boxSize; y++){
+            for(let x = xPoint; x < xPoint + boxSize; x++){
+                console.log('x:y', `${x}:${y}`);
+                //get innerBox index from gameBlock map
+                let index = this.gameBlocks.get(`${x}:${y}`);
+                this.innerBox[index].box = true;
             }
         }
 
-        console.log(this.box);
+        // console.log(this.box);
     }
 
     addKeyboardsControls(){
