@@ -7,7 +7,7 @@ export default class Game extends LightningElement {
     score = 0;
     blockSize = 40;
 
-    @track gameBlocks = new Map();
+    gameBlocks = new Map();
     renderComplete = false;
     xSpeed = 1;
     ySpeed = 0;
@@ -19,42 +19,47 @@ export default class Game extends LightningElement {
     yMax;
 
     box = new Map();
-    innerBox;
+    @track innerBox;
 
     startGame(){
         setInterval(() => { 
-            // this.move();
-        }, 300);
+            this.move();
+        }, 600);
     }
 
-    // move(){
-    //     // let curPosIndex = this.gameBlocks.findIndex(x => x.id === `${this.xHead}:${this.yHead}`);
+    getIndex(x, y){
+        return this.gameBlocks.get(`${x}:${y}`);
+    }
 
-    //     this.gameBlocks[curPosIndex].snake  = false;
+    move(){
+        let curPosIndex = this.getIndex(this.xHead, this.yHead);
+        console.log(this.innerBox[curPosIndex]);
+        this.innerBox[curPosIndex].active  = false;
+        console.log(this.innerBox[curPosIndex]);
 
-    //     this.xHead += this.xSpeed;
-    //     this.yHead += this.ySpeed;
+        this.xHead += this.xSpeed;
+        this.yHead += this.ySpeed;
 
-    //     if(this.xHead >= this.xMax){
-    //         this.xHead = 0;
-    //     }
+        if(this.xHead >= this.xMax){
+            this.xHead = 0;
+        }
 
-    //     if(this.xHead < 0){
-    //         this.xHead = this.xMax - 1;
-    //     }
+        if(this.xHead < 0){
+            this.xHead = this.xMax - 1;
+        }
 
-    //     if(this.yHead >= this.yMax){
-    //         this.yHead = 0;
-    //     }
+        if(this.yHead >= this.yMax){
+            this.yHead = 0;
+        }
 
-    //     if(this.yHead < 0){
-    //         this.yHead = this.yMax - 1;
-    //     }
+        if(this.yHead < 0){
+            this.yHead = this.yMax - 1;
+        }
 
 
-    //     let newPosIndex = this.gameBlocks.findIndex(x => x.id === `${this.xHead}:${this.yHead}`);
-    //     this.gameBlocks[newPosIndex].snake  = true;        
-    // }
+        let newPosIndex = this.getIndex(this.xHead, this.yHead);
+        this.innerBox[newPosIndex].active  = true;        
+    }
 
     renderedCallback(){
         if(!this.renderComplete){
@@ -84,6 +89,7 @@ export default class Game extends LightningElement {
             this.addKeyboardsControls();
             this.innerBox = tmpBlocks;
             this.renderBox(4, 5)
+            this.startGame();
         }
         
     }
